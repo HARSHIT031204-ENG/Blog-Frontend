@@ -2,7 +2,7 @@ import Allpages from "../Pages/AllPages";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import GithubcallBack from "./Githubcallback";
 import FinanceDashboard from "../Pages/trialPage";
-
+import Sharecomponent from "../Pages/Sharecomponent"
 
 function App() {
   const {
@@ -30,6 +30,7 @@ function App() {
         <Route path="/ShowBlog" element={<ShowBlogPage />} />
         <Route path="/signup/google" element={"Hello"} />
         <Route path="/github/callback" element={<GithubcallBack />} />
+        <Route path="/share" element={<Sharecomponent />} />
       </Routes>
     </Router>
   );
