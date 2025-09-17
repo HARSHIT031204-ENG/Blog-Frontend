@@ -12,8 +12,9 @@ export default function FinanceDashboard() {
   const dispatch = useDispatch()  
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
-
-
+  const [islike, setislike] = useState(false)
+  const [likecount, setlikecount] = useState(0)
+  const [watchcount, setwatchcount] = useState(0)
   const nevigate = useNavigate();
   const user = useSelector((state) => state.auth.user);
 
@@ -45,8 +46,17 @@ export default function FinanceDashboard() {
     return <p className="text-white text-center mt-10">Loading posts...</p>;
   }
 
+  const likefunction = (ID) => {
+    
+    if(islike) {
+        setlikecount(likecount-1)
+    } else {
+        setlikecount(likecount+1)
+    }
 
-  const close = () => setIsShare(false);
+    setislike(!islike)
+  }
+
   return (
     <>
       <div className="max-w-4xl mx-auto my-24 shadow-lg rounded-lg flex flex-col p-6 space-y-6">
@@ -71,9 +81,9 @@ export default function FinanceDashboard() {
 
               {/* Action Buttons */}
               <div className="flex justify-around items-center bg-gray-100 rounded-b-lg p-3 mt-2 shadow-inner">
-                <button className="text-gray-600 flex hover:text-gray-800">
+                <button className="text-gray-600 flex hover:text-gray-800" onClick={() => {setislike(!islike), likefunction(blog._id)}}>
                   <Heart className="w-5 h-5 cursor-pointer" />
-                  <span className="ml-1 text-sm">1</span>
+                  <span className="ml-1 text-sm">{likecount}</span>
                 </button>
 
                 <button className="text-gray-600 flex hover:text-gray-800">
