@@ -7,7 +7,6 @@ const Sharecomponent = () => {
   
   console.log(postUrl);
   
-  // Build manual share links
   const whatsappLink = `https://wa.me/?text=${encodeURIComponent(postUrl)}`;
   const linkedinLink = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(postUrl)}`;
   const twitterLink = `https://twitter.com/intent/tweet?url=${encodeURIComponent(postUrl)}`;
