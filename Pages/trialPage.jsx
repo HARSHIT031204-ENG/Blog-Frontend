@@ -14,10 +14,14 @@ export default function FinanceDashboard() {
   const [loading, setLoading] = useState(true);
   const [islike, setislike] = useState(false)
   const [likecount, setlikecount] = useState(0)
+  const [likespost, setlikespost] = useState({})
   const [watchcount, setwatchcount] = useState(0)
   const nevigate = useNavigate();
   const user = useSelector((state) => state.auth.user);
 
+
+
+  const [usfu, setusfu ] = useState(null)
   const handleClick = (ID) => {
     dispatch(postreducer(`https://localhost:8000/api/v1/post/${ID}`))
     nevigate("/share");
@@ -47,14 +51,24 @@ export default function FinanceDashboard() {
   }
 
   const likefunction = (ID) => {
+    setlikespost((prev) => {
+      const post = prev[ID] || { count: 0, liked: false }
+      return {
+        ...prev,
+        [ID]: {
+          count: post.liked ? post.count - 1 : post.count + 1,
+          liked: !post.liked,
+        },
+      };
+    })
     
-    if(islike) {
-        setlikecount(likecount-1)
-    } else {
-        setlikecount(likecount+1)
-    }
+    // if(islike) {
+    //     setlikecount(likecount-1)
+    // } else {
+    //     setlikecount(likecount+1)
+    // }
 
-    setislike(!islike)
+    // setislike(!islike)
   }
 
   return (
@@ -83,7 +97,7 @@ export default function FinanceDashboard() {
               <div className="flex justify-around items-center bg-gray-100 rounded-b-lg p-3 mt-2 shadow-inner">
                 <button className="text-gray-600 flex hover:text-gray-800" onClick={() => {setislike(!islike), likefunction(blog._id)}}>
                   <Heart className="w-5 h-5 cursor-pointer" />
-                  <span className="ml-1 text-sm">{likecount}</span>
+                  <span className="ml-1 text-sm">{likespost[blog._id]?.count || 0}</span>
                 </button>
 
                 <button className="text-gray-600 flex hover:text-gray-800">
