@@ -7,6 +7,8 @@ import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 
 
+
+
 export default function FinanceDashboard() {
 
   const dispatch = useDispatch()  
@@ -19,6 +21,7 @@ export default function FinanceDashboard() {
   const nevigate = useNavigate();
   const user = useSelector((state) => state.auth.user);
 
+  const[some, setthree] = useState(null)
   const handleClick = (ID) => {
     dispatch(postreducer(`https://localhost:8000/api/v1/post/${ID}`))
     nevigate("/share");
